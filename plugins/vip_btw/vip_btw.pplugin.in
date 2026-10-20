@@ -1,0 +1,27 @@
+{
+	"$schema": "https://raw.githubusercontent.com/untrustedmodders/plugify/refs/heads/main/schemas/plugin.schema.json",
+	"version": "${VIP_BTW_VERSION}",
+	"name": "vip_btw",
+	"description": "[VIP] Buy Team Weapon: registers a 'mm_<name>' console and '!<name>' chat command for every weapon of vip_btw.ini's CT/T sections, letting a VIP with the 'btw' feature buy the opposing team's weapons on their own table (price and buy-zone checks as in the original). Ported from the Pisex VIP core module VIP_BuyTeamWeapon (vip_btw). Requires the vip core.",
+	"author": "Pisex, ported to Plugify",
+	"website": "https://github.com/untrustedmodders/plugify",
+	"license": "GPL-3.0",
+	"entry": "bin/vip_btw",
+	"platforms": [],
+	"language": "cpp",
+	"dependencies": [
+		{
+			"name": "s2sdk",
+			"constraints": ">=2.18.2"
+		},
+		{
+			"name": "vip",
+			"constraints": ">=1.0.0"
+		},
+		{
+			"name": "hudmenu",
+			"constraints": ">=1.0.0",
+			"optional": true
+		}
+	]
+}
