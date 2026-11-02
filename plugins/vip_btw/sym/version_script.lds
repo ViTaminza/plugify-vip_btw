@@ -9,10 +9,6 @@
            the vip plugin's exported methods) */
         __vip_*;
 
-        /* hudmenu binding slots (defined by hudmenu_bindings, filled by the plugify module from
-           the hudmenu plugin's exported GetClientMenuType/SetClientMenuType) */
-        __hudmenu_*;
-
         /* No exported methods: vip_btw exposes nothing to other plugins. */
 
     local: *;

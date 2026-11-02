@@ -13,6 +13,9 @@
 
 namespace vip_btw {
 
+// CS2 player slots (PITFALLS C2): every slot loop and guard stops here.
+constexpr int kMaxSlots = 64;
+
 // The original's WeaponData: the entity name ("weapon_ak47") and the price.
 struct WeaponData {
 	std::string szName;
@@ -68,6 +71,32 @@ inline std::string SafeReplace(std::string_view subject, std::string_view search
 // The original stripped both prefixes with safe_replace, all occurrences.
 inline std::string CleanCommand(std::string_view command) {
 	return SafeReplace(SafeReplace(command, "mm_", ""), "!", "");
+}
+
+// The chat triggers s2sdk chains to a command (the server settings ship "!" and "/"). Only a
+// leading character is a trigger: the original registered "!<name>" for chat and "<name>" for the
+// s2sdk command the chat path then reaches.
+inline bool IsChatTrigger(char c) {
+	return c == '!' || c == '/';
+}
+
+// "!ak47" -> "ak47", "ak47" -> "ak47"; only a leading trigger is removed. An input that is just
+// the trigger becomes an empty string (the caller rejects it).
+inline std::string StripChatTrigger(std::string_view name) {
+	if (!name.empty() && IsChatTrigger(name.front())) {
+		return std::string(name.substr(1));
+	}
+	return std::string(name);
+}
+
+// The two spellings the original registered per weapon (LoadSection): the console "mm_<name>"
+// and the chat "!<name>".
+inline std::string ConsoleCommandName(std::string_view command) {
+	return "mm_" + std::string(command);
+}
+
+inline std::string ChatCommandName(std::string_view command) {
+	return "!" + std::string(command);
 }
 
 // The table choice of the original: the CT table for CTs (team 3), the T table for everyone else.

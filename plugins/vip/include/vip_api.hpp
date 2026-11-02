@@ -387,8 +387,8 @@ public:
 	int VIP_GetTotalRounds() const { return detail::Available() ? static_cast<int>(::vip::VIP_GetTotalRounds()) : 0; }
 
 	// The original handed out the CGameEntitySystem pointer of the utils API; s2sdk exposes no
-	// engine layout, so no pointer can cross the boundary. Ported modules use the pisexcompat
-	// schema helpers / s2sdk entity functions instead; this returns nullptr for source parity.
+	// engine layout, so no pointer can cross the boundary. Ported modules use the s2sdk entity
+	// functions instead; this returns nullptr for source parity.
 	void* VIP_GetEntitySystem() const { return nullptr; }
 
 	// --- cookies ---------------------------------------------------------------------------
